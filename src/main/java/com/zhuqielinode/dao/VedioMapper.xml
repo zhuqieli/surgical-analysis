@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhuqielinode.dao.VedioMapper">
+  <resultMap id="BaseResultMap" type="com.zhuqielinode.po.Vedio">
+    <id column="vid" jdbcType="VARCHAR" property="vid" />
+    <result column="puturl" jdbcType="VARCHAR" property="puturl" />
+    <result column="outurl" jdbcType="VARCHAR" property="outurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    vid, puturl, outurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vedio_table
+    where vid = #{vid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from vedio_table
+    where vid = #{vid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zhuqielinode.po.Vedio">
+    insert into vedio_table (vid, puturl, outurl
+      )
+    values (#{vid,jdbcType=VARCHAR}, #{puturl,jdbcType=VARCHAR}, #{outurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuqielinode.po.Vedio">
+    insert into vedio_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        vid,
+      </if>
+      <if test="puturl != null">
+        puturl,
+      </if>
+      <if test="outurl != null">
+        outurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vid != null">
+        #{vid,jdbcType=VARCHAR},
+      </if>
+      <if test="puturl != null">
+        #{puturl,jdbcType=VARCHAR},
+      </if>
+      <if test="outurl != null">
+        #{outurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuqielinode.po.Vedio">
+    update vedio_table
+    <set>
+      <if test="puturl != null">
+        puturl = #{puturl,jdbcType=VARCHAR},
+      </if>
+      <if test="outurl != null">
+        outurl = #{outurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuqielinode.po.Vedio">
+    update vedio_table
+    set puturl = #{puturl,jdbcType=VARCHAR},
+      outurl = #{outurl,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=VARCHAR}
+  </update>
+</mapper>
